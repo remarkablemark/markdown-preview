@@ -59,7 +59,7 @@ describe('App component', () => {
 
 [link](https://example.com)
 
-![image](https://via.placeholder.com/150)
+![image](https://picsum.photos/100)
 
 > Blockquote
 
