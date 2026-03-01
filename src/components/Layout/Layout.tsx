@@ -26,37 +26,41 @@ export function Layout({
   return (
     <div
       data-testid="layout-container"
-      className={`flex h-screen flex-col md:flex-row ${className}`}
+      className={`flex h-screen flex-col ${className}`}
     >
-      {/* Editor Pane */}
-      <div
-        className={`flex-1 overflow-auto border-r border-gray-200 ${isPreviewOnly ? 'hidden' : ''} ${
-          isSplit ? 'md:w-1/2' : 'w-full'
-        }`}
-      >
-        {editorPane}
-      </div>
-
-      {/* Mobile Toggle Button */}
-      <div className="flex justify-center border-t border-b border-gray-200 p-2 md:hidden">
+      {/* Header */}
+      <header className="flex items-center justify-between border-b border-gray-200 px-4 py-2">
+        <h1 className="text-lg font-semibold">Markdown Preview</h1>
         <button
           type="button"
           onClick={onToggleView}
           aria-label={toggleLabel}
           aria-pressed={isEditorOnly ? 'false' : 'true'}
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none md:hidden"
         >
           {toggleLabel}
         </button>
-      </div>
+      </header>
 
-      {/* Preview Pane */}
-      <div
-        className={`flex-1 overflow-auto ${isEditorOnly ? 'hidden' : ''} ${
-          isSplit ? 'md:w-1/2' : 'w-full'
-        }`}
-      >
-        {previewPane}
+      {/* Editor and Preview Panes */}
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Editor Pane */}
+        <div
+          className={`flex-1 overflow-auto border-r border-gray-200 ${isPreviewOnly ? 'hidden' : ''} ${
+            isSplit ? 'md:w-1/2' : 'w-full'
+          }`}
+        >
+          {editorPane}
+        </div>
+
+        {/* Preview Pane */}
+        <div
+          className={`flex-1 overflow-auto ${isEditorOnly ? 'hidden' : ''} ${
+            isSplit ? 'md:w-1/2' : 'w-full'
+          }`}
+        >
+          {previewPane}
+        </div>
       </div>
     </div>
   );
