@@ -126,4 +126,61 @@ describe('Preview Component', () => {
       expect(preview).toBeInTheDocument();
     });
   });
+
+  describe('sanitization options', () => {
+    it('renders HTML without sanitization when sanitize option is false', () => {
+      const markdown = '<strong>Bold</strong> text';
+      render(
+        <Preview
+          markdown={markdown}
+          options={{ sanitize: false, gfm: true, breaks: false }}
+        />,
+      );
+
+      const preview = screen.getByRole('region', { name: /markdown preview/i });
+      expect(preview.innerHTML).toContain('<strong>Bold</strong>');
+    });
+
+    it('respects gfm option for GitHub Flavored Markdown', () => {
+      const markdown = '~~strikethrough~~';
+      render(
+        <Preview
+          markdown={markdown}
+          options={{ gfm: true, sanitize: false }}
+        />,
+      );
+
+      const preview = screen.getByRole('region', { name: /markdown preview/i });
+      // GFM should render strikethrough
+      expect(preview.innerHTML).toContain('<del>');
+    });
+
+    it('respects breaks option for line breaks', () => {
+      const markdown = 'Line 1\nLine 2';
+      render(
+        <Preview
+          markdown={markdown}
+          options={{ breaks: true, sanitize: false }}
+        />,
+      );
+
+      const preview = screen.getByRole('region', { name: /markdown preview/i });
+      // With breaks: true, newlines should become <br> tags
+      expect(preview.innerHTML).toContain('<br>');
+    });
+
+    it('uses custom empty placeholder when provided', () => {
+      render(
+        <Preview
+          markdown=""
+          options={{
+            emptyPlaceholder: '<p class="custom">No content yet</p>',
+          }}
+        />,
+      );
+
+      const preview = screen.getByRole('region', { name: /markdown preview/i });
+      expect(preview.innerHTML).toContain('No content yet');
+    });
+  });
 });

@@ -221,4 +221,126 @@ describe('Editor Component', () => {
       expect(textarea).toBeDisabled();
     });
   });
+
+  describe('onCursorChange callback', () => {
+    it('calls onCursorChange when text is selected', () => {
+      const onCursorChange = vi.fn();
+      const testValue = `# Hello
+World`; // Actual newline, not \n
+      render(
+        <Editor
+          value={testValue}
+          onChange={() => undefined}
+          onCursorChange={onCursorChange}
+        />,
+      );
+
+      const textarea = screen.getByRole<HTMLTextAreaElement>('textbox', {
+        name: /markdown editor/i,
+      });
+
+      // Verify the textarea has the expected value with newline
+      expect(textarea.value).toBe(testValue);
+
+      // Manually set selection range
+      textarea.setSelectionRange(8, 13);
+
+      fireEvent.select(textarea);
+
+      // onCursorChange should be called with cursor position
+      // text before cursor: "# Hello\n" -> split by '\n' -> ["# Hello", ""]
+      // currentLine = 2, currentColumn = 0 + 1 = 1
+      expect(onCursorChange).toHaveBeenCalledWith({
+        line: 2,
+        column: 1,
+        offset: 8,
+      });
+    });
+
+    it('tracks cursor position accurately on click', () => {
+      const onCursorChange = vi.fn();
+      const testValue = `Line 1
+Line 2
+Line 3`; // Actual newlines
+      render(
+        <Editor
+          value={testValue}
+          onChange={() => undefined}
+          onCursorChange={onCursorChange}
+        />,
+      );
+
+      const textarea = screen.getByRole<HTMLTextAreaElement>('textbox', {
+        name: /markdown editor/i,
+      });
+
+      // "Line 1\n" = 7 chars, position 7 is at start of "Line 2"
+      textarea.setSelectionRange(7, 7);
+
+      fireEvent.select(textarea);
+
+      expect(onCursorChange).toHaveBeenCalledWith({
+        line: 2,
+        column: 1,
+        offset: 7,
+      });
+    });
+
+    it('handles cursor at beginning of text', () => {
+      const onCursorChange = vi.fn();
+      render(
+        <Editor
+          value="Some text"
+          onChange={() => undefined}
+          onCursorChange={onCursorChange}
+        />,
+      );
+
+      const textarea = screen.getByRole<HTMLTextAreaElement>('textbox', {
+        name: /markdown editor/i,
+      });
+
+      // Select at start
+      textarea.setSelectionRange(0, 0);
+
+      fireEvent.select(textarea);
+
+      expect(onCursorChange).toHaveBeenCalledWith({
+        line: 1,
+        column: 1,
+        offset: 0,
+      });
+    });
+
+    it('handles multi-line cursor position', () => {
+      const onCursorChange = vi.fn();
+      const testValue = `# Title
+
+Paragraph here`; // Actual newlines: "# Title\n\nParagraph here"
+      render(
+        <Editor
+          value={testValue}
+          onChange={() => undefined}
+          onCursorChange={onCursorChange}
+        />,
+      );
+
+      const textarea = screen.getByRole<HTMLTextAreaElement>('textbox', {
+        name: /markdown editor/i,
+      });
+
+      // "# Title\n\n" = 9 chars (positions 0-8), position 9 is at 'P' in "Paragraph"
+      // text before cursor: "# Title\n\n" -> split -> ["# Title", "", ""]
+      // currentLine = 3, currentColumn = 0 + 1 = 1
+      textarea.setSelectionRange(9, 9);
+
+      fireEvent.select(textarea);
+
+      expect(onCursorChange).toHaveBeenCalledWith({
+        line: 3,
+        column: 1,
+        offset: 9,
+      });
+    });
+  });
 });

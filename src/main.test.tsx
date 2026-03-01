@@ -1,16 +1,22 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import App from './components/App';
 
+// Mock the root element for main.tsx tests
+const mockRoot = document.createElement('div');
+mockRoot.id = 'root';
+
 describe('Main Integration Tests', () => {
   beforeEach(() => {
-    document.body.innerHTML = '<div id="root"></div>';
+    document.body.innerHTML = '';
+    document.body.appendChild(mockRoot);
   });
 
   afterEach(() => {
     document.body.innerHTML = '';
+    vi.clearAllMocks();
   });
 
   describe('User Story 1: Write and Edit Markdown Content', () => {
@@ -135,6 +141,21 @@ describe('Main Integration Tests', () => {
 
       const preview = screen.getByRole('region', { name: /markdown preview/i });
       expect(preview).toHaveTextContent(/start typing/i);
+    });
+  });
+
+  describe('main.tsx entry point', () => {
+    it('renders App component wrapped in StrictMode', async () => {
+      // Import main.tsx to execute the entry point code
+      await import('./main');
+
+      // Wait for the app to render
+      await waitFor(() => {
+        const editor = screen.queryByRole('textbox', {
+          name: /markdown editor/i,
+        });
+        expect(editor).toBeInTheDocument();
+      });
     });
   });
 });
