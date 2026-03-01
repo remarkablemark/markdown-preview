@@ -2,8 +2,35 @@
 
 **Feature Branch**: `001-markdown-editor-preview`
 **Created**: 2026-03-01
-**Status**: Draft
+**Updated**: 2026-03-01
+**Status**: Implemented
 **Input**: User description: "Markdown editor and preview"
+
+## Implementation Notes
+
+### Technical Decisions
+
+- **Markdown Parser**: `marked` v17.0.3 - Fast, lightweight markdown parser with configurable options (GFM, breaks)
+- **HTML Sanitization**: `DOMPurify` v3.3.1 - Prevents XSS attacks by sanitizing rendered HTML output
+- **Styling**: Tailwind CSS v4.2.1 with `@tailwindcss/typography` plugin for prose styling
+- **Layout**: Responsive flexbox layout with `h-screen`, `flex-col` (mobile) and `md:flex-row` (desktop)
+- **State Management**: React `useState` and `useMemo` hooks for markdown parsing memoization
+
+### Component Architecture
+
+```
+App (root)
+├── Layout (responsive container)
+│   ├── Editor (textarea with controlled state)
+│   └── Preview (sanitized HTML rendering)
+```
+
+### Key Implementation Details
+
+- **Layout Classes**: Removed conflicting utility classes from `index.html` (`flex`, `min-h-screen`, `place-items-center`, `mx-auto`) to allow Layout component's full-screen flexbox layout to work correctly
+- **Typography Plugin**: Added `@tailwindcss/typography` plugin to enable `prose` classes for styling raw HTML output from markdown parser
+- **Responsive Breakpoint**: 768px (`md:`) for switching between stacked (mobile) and side-by-side (desktop) layouts
+- **Empty State**: Placeholder text demonstrates markdown syntax (headers, bold, italic, lists, links, code)
 
 ## Clarifications
 
