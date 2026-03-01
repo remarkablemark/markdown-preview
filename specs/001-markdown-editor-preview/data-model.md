@@ -143,8 +143,6 @@ interface EditorProps {
   placeholder?: string;
   /** Whether editor is disabled */
   disabled?: boolean;
-  /** CSS class names */
-  className?: string;
 }
 ```
 
@@ -158,8 +156,6 @@ interface PreviewProps {
   markdown: string;
   /** Rendering options */
   options?: Partial<PreviewOptions>;
-  /** CSS class names */
-  className?: string;
   /** Aria label for accessibility */
   ariaLabel?: string;
 }
@@ -177,8 +173,6 @@ interface LayoutProps {
   mode: LayoutMode;
   /** Callback to toggle view mode (mobile) */
   onToggleView?: () => void;
-  /** CSS class names */
-  className?: string;
 }
 ```
 

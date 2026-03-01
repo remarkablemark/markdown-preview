@@ -29,7 +29,6 @@ interface EditorProps {
   }) => void;
   placeholder?: string;
   disabled?: boolean;
-  className?: string;
 }
 ```
 
@@ -72,7 +71,6 @@ interface PreviewProps {
     sanitize: boolean;
     emptyPlaceholder: string;
   }>;
-  className?: string;
   ariaLabel?: string;
 }
 ```
@@ -111,7 +109,6 @@ interface LayoutProps {
   children: React.ReactNode;
   mode: 'split' | 'editor-only' | 'preview-only';
   onToggleView?: () => void;
-  className?: string;
 }
 ```
 
