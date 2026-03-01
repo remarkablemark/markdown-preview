@@ -16,6 +16,10 @@
 
 - Q: How should the editor and preview be arranged on mobile devices? → A: Toggle/Tab switch — user taps to switch between editor-only and preview-only views
 
+### Session 2026-03-01 (Layout)
+
+- Q: What are the exact layout dimensions for the desktop split-screen view? → A: Full viewport height, equal 50/50 width split; vertical and horizontal scrolling if content overflows
+
 ## Constitution Alignment
 
 Verify this feature adheres to project principles:
@@ -72,8 +76,8 @@ As a user, I want to see the editor and preview side-by-side so that I can write
 
 **Acceptance Scenarios**:
 
-1. **Given** the application loads, **When** displayed on desktop, **Then** editor and preview are visible side-by-side
-2. **Given** content exceeds viewport, **When** user scrolls editor, **Then** preview scrolls independently
+1. **Given** the application loads, **When** displayed on desktop, **Then** editor and preview are visible side-by-side with equal 50/50 width split taking full viewport height
+2. **Given** content exceeds viewport, **When** user scrolls editor or preview, **Then** each pane scrolls independently both vertically and horizontally
 3. **Given** narrow viewport (mobile), **When** application loads, **Then** user can toggle between editor-only and preview-only views via tab/switch control
 
 ---
@@ -110,11 +114,12 @@ As a user, I want helpful guidance when starting with an empty editor so that I 
 - **FR-002**: System MUST render markdown content as HTML in a preview panel using an established open-source markdown parser library
 - **FR-003**: System MUST update the preview automatically as the user types (live preview)
 - **FR-004**: System MUST support standard markdown syntax including headers, bold, italic, lists, links, and code blocks
-- **FR-005**: System MUST display editor and preview simultaneously in a split-screen layout on desktop viewports
-- **FR-006**: System MUST provide a toggle/switch control to switch between editor-only and preview-only views on mobile viewports
-- **FR-007**: System MUST display placeholder or example content when editor is empty on initial load
-- **FR-008**: System MUST handle large documents (minimum 10,000 characters) without performance degradation
-- **FR-009**: System MUST treat pasted HTML as plain text, not execute or render it
+- **FR-005**: System MUST display editor and preview simultaneously in a split-screen layout on desktop viewports with equal 50/50 width split and full viewport height
+- **FR-006**: System MUST provide independent vertical and horizontal scrolling for each pane when content overflows
+- **FR-007**: System MUST provide a toggle/switch control to switch between editor-only and preview-only views on mobile viewports
+- **FR-008**: System MUST display placeholder or example content when editor is empty on initial load
+- **FR-009**: System MUST handle large documents (minimum 10,000 characters) without performance degradation
+- **FR-010**: System MUST treat pasted HTML as plain text, not execute or render it
 
 ### Key Entities _(include if feature involves data)_
 
