@@ -30,7 +30,7 @@ export function Layout({
     >
       {/* Editor Pane */}
       <div
-        className={`flex-1 overflow-auto ${isPreviewOnly ? 'hidden' : ''} ${
+        className={`flex-1 overflow-auto border-r border-gray-200 ${isPreviewOnly ? 'hidden' : ''} ${
           isSplit ? 'md:w-1/2' : 'w-full'
         }`}
       >
