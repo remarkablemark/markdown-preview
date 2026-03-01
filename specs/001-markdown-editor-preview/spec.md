@@ -12,6 +12,10 @@
 - Q: What markdown renderer should be used? → A: Use established open-source markdown parser library (e.g., marked, markdown-it, remark)
 - Q: How should toolbar buttons insert formatting into the editor? → A: Remove toolbar entirely, keep it simple
 
+### Session 2026-03-01 (Mobile)
+
+- Q: How should the editor and preview be arranged on mobile devices? → A: Toggle/Tab switch — user taps to switch between editor-only and preview-only views
+
 ## Constitution Alignment
 
 Verify this feature adheres to project principles:
@@ -70,7 +74,7 @@ As a user, I want to see the editor and preview side-by-side so that I can write
 
 1. **Given** the application loads, **When** displayed on desktop, **Then** editor and preview are visible side-by-side
 2. **Given** content exceeds viewport, **When** user scrolls editor, **Then** preview scrolls independently
-3. **Given** narrow viewport (mobile), **When** application loads, **Then** layout adapts to show editor and preview appropriately
+3. **Given** narrow viewport (mobile), **When** application loads, **Then** user can toggle between editor-only and preview-only views via tab/switch control
 
 ---
 
@@ -107,7 +111,7 @@ As a user, I want helpful guidance when starting with an empty editor so that I 
 - **FR-003**: System MUST update the preview automatically as the user types (live preview)
 - **FR-004**: System MUST support standard markdown syntax including headers, bold, italic, lists, links, and code blocks
 - **FR-005**: System MUST display editor and preview simultaneously in a split-screen layout on desktop viewports
-- **FR-006**: System MUST adapt layout appropriately for mobile and narrow viewport widths
+- **FR-006**: System MUST provide a toggle/switch control to switch between editor-only and preview-only views on mobile viewports
 - **FR-007**: System MUST display placeholder or example content when editor is empty on initial load
 - **FR-008**: System MUST handle large documents (minimum 10,000 characters) without performance degradation
 - **FR-009**: System MUST treat pasted HTML as plain text, not execute or render it

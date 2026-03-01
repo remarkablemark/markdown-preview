@@ -42,9 +42,9 @@
 
 ### Clarifications Session Summary
 
-- **Questions asked**: 2
-- **Answers recorded**: 2
-- **Sections updated**: User Scenarios (removed toolbar story), Functional Requirements (removed toolbar FRs), Success Criteria (removed toolbar accessibility)
+- **Questions asked**: 3 (2 initial + 1 mobile)
+- **Answers recorded**: 3
+- **Sections updated**: User Scenarios (removed toolbar story, added mobile toggle behavior), Functional Requirements (removed toolbar FRs, added mobile toggle FR), Success Criteria (removed toolbar accessibility)
 
 ### Content Quality
 
@@ -87,14 +87,14 @@ Specification is ready for `/speckit.clarify` or `/speckit.plan`.
 
 ## Coverage Summary (Post-Clarification)
 
-| Category                      | Status   | Notes                                           |
-| ----------------------------- | -------- | ----------------------------------------------- |
-| Functional Scope & Behavior   | Resolved | Toolbar removed, scope simplified               |
-| Domain & Data Model           | Clear    | No persistence required for this feature        |
-| Interaction & UX Flow         | Resolved | Direct text input, no toolbar interaction       |
-| Non-Functional Quality        | Clear    | Performance targets specified                   |
-| Integration & Dependencies    | Resolved | Library-based markdown renderer (category only) |
-| Edge Cases & Failure Handling | Clear    | 5 edge cases documented                         |
-| Constraints & Tradeoffs       | Clear    | YAGNI applied, toolbar excluded                 |
-| Terminology & Consistency     | Clear    | Consistent terminology                          |
-| Completion Signals            | Clear    | Acceptance criteria testable                    |
+| Category                      | Status   | Notes                                                    |
+| ----------------------------- | -------- | -------------------------------------------------------- |
+| Functional Scope & Behavior   | Resolved | Toolbar removed, scope simplified                        |
+| Domain & Data Model           | Clear    | No persistence required for this feature                 |
+| Interaction & UX Flow         | Resolved | Direct text input, no toolbar; mobile toggle interaction |
+| Non-Functional Quality        | Clear    | Performance targets specified                            |
+| Integration & Dependencies    | Resolved | Library-based markdown renderer (category only)          |
+| Edge Cases & Failure Handling | Clear    | 5 edge cases documented                                  |
+| Constraints & Tradeoffs       | Clear    | YAGNI applied, toolbar excluded                          |
+| Terminology & Consistency     | Clear    | Consistent terminology                                   |
+| Completion Signals            | Clear    | Acceptance criteria testable                             |
