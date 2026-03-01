@@ -54,10 +54,6 @@ Single project structure with component-driven architecture:
   - Import and configure marked parser
   - Implement memoized markdown parsing
   - Export `html`, `isEmpty`, `parse`, `options`, `setOptions`
-- [ ] T006 [P] Add basic CSS layout utilities in `src/index.css`:
-  - Flexbox container classes
-  - Full viewport height utilities
-  - Scroll overflow handling
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -177,15 +173,15 @@ Single project structure with component-driven architecture:
   - `src/components/Layout/Layout.tsx` - main component
   - `src/components/Layout/index.ts` - barrel export
 - [ ] T024 [US3] Implement Layout component in `src/components/Layout/Layout.tsx`:
-  - Flexbox container with flex-direction row
-  - Editor and Preview panes with flex: 1
-  - Mobile toggle button
+  - Flexbox container with `flex flex-row h-screen`
+  - Editor and Preview panes with `flex-1 overflow-auto`
+  - Mobile toggle button with conditional rendering
   - Viewport mode state management
-- [ ] T025 [US3] Add responsive CSS in `src/index.css`:
-  - Media query at 768px breakpoint
-  - Split mode: `flex-direction: row`, both panes visible
-  - Mobile mode: toggle visibility with hidden class
-  - Independent overflow: auto for each pane
+- [ ] T025 [US3] Add responsive Tailwind classes in `src/components/Layout/Layout.tsx`:
+  - Desktop (≥768px): `md:flex-row` for side-by-side layout
+  - Mobile (<768px): Toggle visibility with conditional classes
+  - Independent scrolling: `overflow-auto` on each pane
+  - Full viewport height: `h-screen` on container
 - [ ] T026 [US3] Add accessibility to Layout toggle in `src/components/Layout/Layout.tsx`:
   - `aria-label` indicating current view
   - `aria-pressed` state for toggle button
@@ -278,7 +274,7 @@ Single project structure with component-driven architecture:
 ### Parallel Opportunities
 
 - **Phase 1**: T002 and T003 can run in parallel
-- **Phase 2**: T004, T005, T006 can all run in parallel (different files)
+- **Phase 2**: T004 and T005 can run in parallel (different files)
 - **Phase 3**: T007 and T008 (tests) can run in parallel; T009 (structure) can start after tests written
 - **Phase 4**: T014 and T015 (tests) can run in parallel; T016 (structure) can start after tests written
 - **Phase 5**: T021 and T022 (tests) can run in parallel; T023 (structure) can start after tests written
@@ -306,7 +302,6 @@ Task: "Create Editor component structure (Editor.tsx, index.ts)"
 # All foundational tasks can run in parallel (different files):
 Task: "Create TypeScript types in src/types/markdown.ts"
 Task: "Create useMarkdown hook in src/hooks/useMarkdown.ts"
-Task: "Add basic CSS layout utilities in src/index.css"
 ```
 
 ---
@@ -351,13 +346,13 @@ With multiple developers:
 | Phase     | Description                | Task Count |
 | --------- | -------------------------- | ---------- |
 | Phase 1   | Setup                      | 3          |
-| Phase 2   | Foundational               | 3          |
+| Phase 2   | Foundational               | 2          |
 | Phase 3   | User Story 1 (Editor)      | 7          |
-| Phase 4   | User Story 2 (Preview)     | 10         |
+| Phase 4   | User Story 2 (Preview)     | 7          |
 | Phase 5   | User Story 3 (Layout)      | 8          |
 | Phase 6   | User Story 4 (Empty State) | 5          |
 | Phase 7   | Polish                     | 10         |
-| **Total** |                            | **46**     |
+| **Total** |                            | **42**     |
 
 ### Tasks per User Story
 
