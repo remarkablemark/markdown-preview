@@ -2,7 +2,7 @@
 
 [![build](https://github.com/remarkablemark/markdown-preview/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/markdown-preview/actions/workflows/build.yml)
 [![test](https://github.com/remarkablemark/markdown-preview/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/markdown-preview/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/remarkablemark/markdown-preview/graph/badge.svg?token=DEr2eVeqdz)](https://codecov.io/gh/remarkablemark/markdown-preview)
+[![codecov](https://codecov.io/gh/remarkablemark/markdown-preview/graph/badge.svg?token=9Y8P42RR9N)](https://codecov.io/gh/remarkablemark/markdown-preview)
 
 Vite React Tailwind Template
 
