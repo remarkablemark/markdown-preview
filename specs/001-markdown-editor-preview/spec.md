@@ -5,17 +5,24 @@
 **Status**: Draft
 **Input**: User description: "Markdown editor and preview"
 
+## Clarifications
+
+### Session 2026-03-01
+
+- Q: What markdown renderer should be used? → A: Use established open-source markdown parser library (e.g., marked, markdown-it, remark)
+- Q: How should toolbar buttons insert formatting into the editor? → A: Remove toolbar entirely, keep it simple
+
 ## Constitution Alignment
 
 Verify this feature adheres to project principles:
 
-| Principle           | Application to This Feature                                                                  |
-| ------------------- | -------------------------------------------------------------------------------------------- |
-| Test-First          | Unit tests for editor component behavior, preview rendering accuracy, and user interactions  |
-| Type Safety         | TypeScript interfaces for editor state, preview content, and configuration options           |
-| Component-Driven    | Separate Editor, Preview, and Toolbar components with clear props and responsibilities       |
-| Accessibility First | Keyboard navigation, screen reader support, proper ARIA labels for editor and preview areas  |
-| Simplicity (YAGNI)  | Core editing and preview functionality only; advanced features deferred to future iterations |
+| Principle           | Application to This Feature                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------- |
+| Test-First          | Unit tests for editor component behavior, preview rendering accuracy, and user interactions |
+| Type Safety         | TypeScript interfaces for editor state, preview content, and configuration options          |
+| Component-Driven    | Separate Editor and Preview components with clear props and responsibilities                |
+| Accessibility First | Keyboard navigation, screen reader support, proper ARIA labels for editor and preview areas |
+| Simplicity (YAGNI)  | Core editing and preview functionality only; toolbar and advanced features excluded         |
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -51,23 +58,7 @@ As a user, I want to see a live preview of how my markdown renders so that I can
 
 ---
 
-### User Story 3 - Use Toolbar for Common Formatting (Priority: P2)
-
-As a user, I want toolbar buttons for common markdown formatting so that I don't need to remember markdown syntax.
-
-**Why this priority**: Improves usability and reduces friction for users unfamiliar with markdown syntax, but core editing works without it.
-
-**Independent Test**: User can click toolbar buttons (bold, italic, header, list) and see corresponding markdown syntax inserted at cursor position.
-
-**Acceptance Scenarios**:
-
-1. **Given** text is selected in the editor, **When** user clicks bold button, **Then** selected text is wrapped with bold markdown syntax
-2. **Given** cursor is positioned in editor, **When** user clicks header button, **Then** header markdown syntax is inserted at cursor
-3. **Given** no text is selected, **When** user clicks list button, **Then** list item syntax is inserted at cursor position
-
----
-
-### User Story 4 - Split-Screen Editor and Preview Layout (Priority: P2)
+### User Story 3 - Split-Screen Editor and Preview Layout (Priority: P2)
 
 As a user, I want to see the editor and preview side-by-side so that I can write and review simultaneously.
 
@@ -83,7 +74,7 @@ As a user, I want to see the editor and preview side-by-side so that I can write
 
 ---
 
-### User Story 5 - Clear Empty State Guidance (Priority: P3)
+### User Story 4 - Clear Empty State Guidance (Priority: P3)
 
 As a user, I want helpful guidance when starting with an empty editor so that I understand what to do.
 
@@ -112,15 +103,14 @@ As a user, I want helpful guidance when starting with an empty editor so that I 
 ### Functional Requirements
 
 - **FR-001**: System MUST provide a text editor area where users can type and edit markdown content
-- **FR-002**: System MUST render markdown content as HTML in a preview panel
+- **FR-002**: System MUST render markdown content as HTML in a preview panel using an established open-source markdown parser library
 - **FR-003**: System MUST update the preview automatically as the user types (live preview)
 - **FR-004**: System MUST support standard markdown syntax including headers, bold, italic, lists, links, and code blocks
-- **FR-005**: Users MUST be able to select text and apply formatting via toolbar buttons
-- **FR-006**: System MUST display editor and preview simultaneously in a split-screen layout on desktop viewports
-- **FR-007**: System MUST adapt layout appropriately for mobile and narrow viewport widths
-- **FR-008**: System MUST display placeholder or example content when editor is empty on initial load
-- **FR-009**: System MUST handle large documents (minimum 10,000 characters) without performance degradation
-- **FR-010**: System MUST treat pasted HTML as plain text, not execute or render it
+- **FR-005**: System MUST display editor and preview simultaneously in a split-screen layout on desktop viewports
+- **FR-006**: System MUST adapt layout appropriately for mobile and narrow viewport widths
+- **FR-007**: System MUST display placeholder or example content when editor is empty on initial load
+- **FR-008**: System MUST handle large documents (minimum 10,000 characters) without performance degradation
+- **FR-009**: System MUST treat pasted HTML as plain text, not execute or render it
 
 ### Key Entities _(include if feature involves data)_
 
@@ -137,4 +127,3 @@ As a user, I want helpful guidance when starting with an empty editor so that I 
 - **SC-003**: 95% of first-time users can produce formatted markdown output within 2 minutes of opening the application
 - **SC-004**: Application handles documents up to 10,000 characters with no perceptible input lag (under 16ms frame time)
 - **SC-005**: Layout displays correctly on viewports from 320px width to 1920px width without horizontal scrolling
-- **SC-006**: All interactive elements (editor, toolbar buttons) are accessible via keyboard navigation and screen readers
