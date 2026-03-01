@@ -35,7 +35,7 @@ export function Editor({
   return (
     <textarea
       aria-label="Markdown editor"
-      className={`h-full w-full resize-none p-4 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${className}`}
+      className={`h-full w-full resize-none bg-white p-4 font-mono text-sm text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-900 dark:text-gray-100 ${className}`}
       value={value}
       onChange={handleChange}
       onSelect={handleSelect}

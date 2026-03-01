@@ -174,4 +174,99 @@ describe('Layout Component', () => {
       expect(layout).toHaveClass('flex');
     });
   });
+
+  describe('dark mode toggle', () => {
+    beforeEach(() => {
+      document.documentElement.classList.remove('dark');
+      localStorage.removeItem('theme');
+    });
+
+    it('displays dark mode toggle button', () => {
+      render(
+        <Layout mode="split">
+          <TestChildren />
+        </Layout>,
+      );
+
+      const darkModeButton = screen.getByRole('button', {
+        name: /switch to dark mode/i,
+      });
+      expect(darkModeButton).toBeInTheDocument();
+    });
+
+    it('toggles dark mode when clicked', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Layout mode="split">
+          <TestChildren />
+        </Layout>,
+      );
+
+      const darkModeButton = screen.getByRole('button', {
+        name: /switch to dark mode/i,
+      });
+
+      expect(document.documentElement.classList.contains('dark')).toBe(false);
+      expect(localStorage.theme).toBeUndefined();
+
+      await user.click(darkModeButton);
+
+      expect(document.documentElement.classList.contains('dark')).toBe(true);
+      expect(localStorage.theme).toBe('dark');
+    });
+
+    it('toggles back to light mode when clicked again', async () => {
+      const user = userEvent.setup();
+
+      // Start with dark mode enabled
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+
+      render(
+        <Layout mode="split">
+          <TestChildren />
+        </Layout>,
+      );
+
+      const darkModeButton = screen.getByRole('button', {
+        name: /switch to light mode/i,
+      });
+
+      await user.click(darkModeButton);
+
+      expect(document.documentElement.classList.contains('dark')).toBe(false);
+      expect(localStorage.theme).toBe('light');
+    });
+
+    it('shows correct icon based on current mode', () => {
+      render(
+        <Layout mode="split">
+          <TestChildren />
+        </Layout>,
+      );
+
+      const darkModeButton = screen.getByRole('button', {
+        name: /switch to dark mode/i,
+      });
+      expect(darkModeButton).toHaveTextContent('☀️');
+
+      // Simulate dark mode
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    });
+
+    it('has correct aria-pressed state', () => {
+      render(
+        <Layout mode="split">
+          <TestChildren />
+        </Layout>,
+      );
+
+      const darkModeButton = screen.getByRole('button', {
+        name: /switch to dark mode/i,
+      });
+      expect(darkModeButton).toHaveAttribute('aria-pressed', 'false');
+    });
+  });
 });
