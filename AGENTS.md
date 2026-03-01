@@ -69,7 +69,6 @@ import type { User } from './types';
 - **Prefer interfaces over types** for object shapes
 - **Use proper event types**: `React.MouseEvent`, `React.FormEvent`, etc.
 - **Component props**: Define interfaces with clear, descriptive property names
-- **Vitest globals** - include `vitest/globals` in tsconfig for global test functions
 
 ### Naming Conventions
 
@@ -114,7 +113,7 @@ import type { User } from './types';
 - **User interactions** - use @testing-library/user-event for simulating user actions
 - **Mock external dependencies** - mock API calls, browser APIs, etc.
 - **Descriptive test names** - should clearly state what is being tested
-- **Vitest globals** - use `vi.fn()`, `vi.mock()`, `vi.clearAllMocks()`
+- **Vitest globals** - use `vi.fn()`, `vi.mock()`, `vi.clearAllMocks()`; no need to import test functions
 - **Test setup** - global test environment configured in `vite.config.mts` with `globals: true`
 - **Coverage exclusions** - Use `/* v8 ignore next -- @preserve */` for a single line that is not testable or `/* v8 ignore start */` and `/* v8 ignore end */` for multiple lines that are not testable
 
