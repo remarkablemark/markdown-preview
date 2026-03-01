@@ -128,7 +128,7 @@ describe('Layout Component', () => {
   });
 
   describe('accessibility', () => {
-    it('toggle button has aria-label indicating current view', () => {
+    it('toggle button has aria-pressed indicating current view', () => {
       render(
         <Layout mode="editor-only">
           <TestChildren />
@@ -138,7 +138,8 @@ describe('Layout Component', () => {
       const toggleButton = screen.getByRole('button', {
         name: /show preview/i,
       });
-      expect(toggleButton).toHaveAttribute('aria-label', 'Show Preview');
+      // When in editor-only mode, aria-pressed is false (preview is not shown)
+      expect(toggleButton).toHaveAttribute('aria-pressed', 'false');
     });
 
     it('toggle button is keyboard accessible', async () => {

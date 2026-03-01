@@ -34,7 +34,6 @@ export function Layout({
         <button
           type="button"
           onClick={onToggleView}
-          aria-label={toggleLabel}
           aria-pressed={isEditorOnly ? 'false' : 'true'}
           className="rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none md:hidden"
         >
