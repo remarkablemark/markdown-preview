@@ -1,4 +1,4 @@
-import type { EditorProps } from '../../types/markdown';
+import type { EditorProps } from 'src/types/markdown';
 
 /**
  * Editor component for markdown input.

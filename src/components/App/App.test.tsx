@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { DEFAULT_MARKDOWN } from 'src/constants';
 
-import { DEFAULT_MARKDOWN } from '../../constants';
 import App from '.';
 
 describe('App component', () => {

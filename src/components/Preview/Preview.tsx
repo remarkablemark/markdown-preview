@@ -1,9 +1,8 @@
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { useMemo } from 'react';
-
-import type { PreviewProps } from '../../types/markdown';
-import { DEFAULT_PREVIEW_OPTIONS } from '../../types/markdown';
+import type { PreviewProps } from 'src/types/markdown';
+import { DEFAULT_PREVIEW_OPTIONS } from 'src/types/markdown';
 
 /**
  * Preview component for rendering markdown as sanitized HTML.

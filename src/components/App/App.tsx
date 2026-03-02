@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { DEFAULT_MARKDOWN } from 'src/constants';
+import type { LayoutMode } from 'src/types/markdown';
 
-import { DEFAULT_MARKDOWN } from '../../constants';
-import type { LayoutMode } from '../../types/markdown';
 import { Editor } from '../Editor';
 import { Layout } from '../Layout';
 import { Preview } from '../Preview';

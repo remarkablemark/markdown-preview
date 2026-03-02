@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
+import type { LayoutProps } from 'src/types/markdown';
 
-import type { LayoutProps } from '../../types/markdown';
 import { DarkModeToggle } from '../DarkModeToggle';
 import { GitHubButton } from '../GitHubButton';
 
