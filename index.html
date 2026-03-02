@@ -17,25 +17,9 @@
             window.matchMedia('(prefers-color-scheme: dark)').matches),
       );
     </script>
-    <script
-      src="https://unpkg.com/github-corners/dist/embed.min.js"
-      data-href="https://github.com/remarkablemark/markdown-preview"
-      data-target="_blank"
-      async
-      defer
-    ></script>
-    <style>
-      .github-corner > svg {
-        opacity: 0.5;
-        transition: opacity 0.4s;
-      }
-      .github-corner:hover > svg {
-        opacity: 1;
-      }
-    </style>
   </head>
-  <body class="flex min-h-screen min-w-80 place-items-center">
-    <div class="mx-auto" id="root"></div>
+  <body>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
