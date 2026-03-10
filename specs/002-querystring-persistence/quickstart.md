@@ -28,16 +28,17 @@ This guide provides a step-by-step walkthrough for implementing URL-based markdo
 ## Step 1: Install Dependencies
 
 ```bash
-npm install lz-string@^1.5.0
-npm install --save-dev @types/lz-string
+npm install lz-string@1.5.0
 ```
 
 **Verify**:
 
 ```bash
 npm list lz-string
-# Should show lz-string@1.5.0 or higher
+# Should show lz-string@1.5.0
 ```
+
+**Note**: `lz-string` includes its own TypeScript type definitions, so `@types/lz-string` is not needed.
 
 ## Step 2: Create Type Definitions
 
@@ -609,7 +610,7 @@ npm start
 ### Test Cases
 
 1. **Empty URL Load**
-   - Open http://localhost:5173
+   - Open http://127.0.0.1:5173
    - Verify default markdown appears
    - Edit content
    - Wait 500ms

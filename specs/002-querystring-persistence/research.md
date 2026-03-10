@@ -257,7 +257,9 @@ const updateUrl = (content: string) => {
 
 | Package   | Version | Purpose                             | Bundle Impact |
 | --------- | ------- | ----------------------------------- | ------------- |
-| lz-string | ^1.5.0  | String compression for URL encoding | ~3KB gzipped  |
+| lz-string | 1.5.0   | String compression for URL encoding | ~3KB gzipped  |
+
+**Note**: `lz-string` includes its own TypeScript type definitions.
 
 ### Browser APIs
 

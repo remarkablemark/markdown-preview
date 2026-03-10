@@ -248,7 +248,7 @@ Implementation details are in `quickstart.md`.
 
 ### External Libraries
 
-- **lz-string**: ^1.5.0 (compression/decompression)
+- **lz-string**: 1.5.0 (compression/decompression, includes TypeScript definitions)
 
 ### Browser APIs
 

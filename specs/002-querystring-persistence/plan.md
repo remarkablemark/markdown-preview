@@ -126,8 +126,7 @@ _Re-evaluated after Phase 1 design completion:_
 
 ### Dependencies Added
 
-- `lz-string@^1.5.0` - String compression library
-- `@types/lz-string` - TypeScript definitions (dev dependency)
+- `lz-string@1.5.0` - String compression library (includes TypeScript definitions)
 
 ### Files to Create
 
