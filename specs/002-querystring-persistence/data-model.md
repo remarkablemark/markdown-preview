@@ -10,36 +10,7 @@ This document defines the data structures, types, and state management for URL-b
 
 ## Core Entities
 
-### 1. MarkdownContent
-
-**Description**: The raw markdown text managed by the editor
-
-**TypeScript Interface**:
-
-```typescript
-interface MarkdownContent {
-  /** Raw markdown text as entered by user */
-  value: string;
-
-  /** Timestamp of last modification (for debugging/logging) */
-  lastModified: Date;
-}
-```
-
-**Validation Rules**:
-
-- `value`: Can be any string including empty string, Unicode, special characters
-- No length limit enforced (browser URL limits apply after compression)
-- Must preserve all whitespace and formatting exactly
-
-**Lifecycle**:
-
-1. **Created**: On page load (from URL or default placeholder)
-2. **Updated**: On every user edit in the editor
-3. **Persisted**: Automatically to URL via debounced sync (500ms)
-4. **Retrieved**: Only on initial page load from querystring
-
-### 2. EncodedUrlParameter
+### 1. EncodedUrlParameter
 
 **Description**: URL-safe compressed representation of markdown content
 
