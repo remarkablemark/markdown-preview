@@ -8,83 +8,20 @@
 
 This document defines the data structures, types, and state management for URL-based markdown persistence. The feature operates entirely client-side with no server storage.
 
-## Core Entities
+## Core Concepts
 
-### 1. EncodedUrlParameter
+### Markdown Content
 
-**Description**: URL-safe compressed representation of markdown content
+- Treated as a simple `string` type
+- No wrapper object or metadata
+- Preserved with 100% fidelity through encode/decode cycle
 
-**TypeScript Interface**:
+### URL Parameter
 
-```typescript
-interface EncodedUrlParameter {
-  /** Querystring parameter name (always 'md') */
-  key: 'md';
-
-  /** LZ-string compressed and URL-encoded markdown */
-  value: string;
-
-  /** Original markdown length before compression */
-  originalLength: number;
-
-  /** Compressed length (for monitoring URL limits) */
-  compressedLength: number;
-}
-```
-
-**Validation Rules**:
-
-- `key`: Must always be `'md'` (constant)
-- `value`: Must be valid LZ-string encoded output (URL-safe characters only)
-- `compressedLength`: Must be ≤ 2048 chars (log warning if exceeded)
-- Round-trip requirement: `decode(encode(content)) === content` (100% fidelity)
-
-**Transformations**:
-
-```typescript
-// Encode: MarkdownContent → EncodedUrlParameter
-const encode = (markdown: string): string => {
-  return compressToEncodedURIComponent(markdown);
-};
-
-// Decode: EncodedUrlParameter → MarkdownContent
-const decode = (encoded: string): string | null => {
-  try {
-    return decompressFromEncodedURIComponent(encoded);
-  } catch {
-    return null; // Return null for corrupt data
-  }
-};
-```
-
-### 3. UrlPersistenceState
-
-**Description**: Internal state managed by the `useUrlPersistence` hook
-
-**TypeScript Interface**:
-
-```typescript
-interface UrlPersistenceState {
-  /** Current markdown content in editor */
-  markdown: string;
-
-  /** Whether content was loaded from URL on initial mount */
-  loadedFromUrl: boolean;
-}
-```
-
-**State Transitions**:
-
-```
-[Initial] → [Loading from URL] → [Loaded]
-                ↓
-         [User Editing] → [Debounced Sync to URL]
-```
-
-**Invariants**:
-
-- `loadedFromUrl` is set once on mount, never changes
-- `markdown` updates immediately on user input, URL sync is debounced
+- **Name**: `md` (constant)
+- **Value**: LZ-string compressed and URL-encoded markdown
+- **Validation**: Must be ≤ 2048 chars (warning logged if exceeded)
+- **Round-trip**: `decode(encode(content)) === content`
 
 ## Constants
 
@@ -157,17 +94,13 @@ export interface UseUrlPersistenceReturn {
 }
 
 /**
- * URL encoder utility functions
+ * URL length check result
  */
-export interface UrlEncoder {
-  /** Encode markdown to URL-safe string */
-  encode: (markdown: string) => EncodeResult;
-
-  /** Decode URL parameter to markdown */
-  decode: (encoded: string) => DecodeResult;
-
-  /** Check if encoded string exceeds URL length limit */
-  exceedsLimit: (encoded: string) => boolean;
+export interface UrlLengthCheck {
+  exceedsLimit: boolean;
+  actualLength: number;
+  maxLength: number;
+  percentUsed: number;
 }
 ```
 
@@ -241,76 +174,14 @@ export interface UrlEncoder {
 
 ## State Management
 
-### Hook Architecture
+### Hook State
 
-```typescript
-/**
- * Custom hook for URL persistence
- * Manages bidirectional sync between editor content and URL
- */
-export function useUrlPersistence(
-  initialMarkdown?: string,
-): UseUrlPersistenceReturn {
-  // Internal state
-  const [markdown, setMarkdownState] = useState<string>('');
-  const [loadedFromUrl, setLoadedFromUrl] = useState<boolean>(false);
+The `useUrlPersistence` hook manages:
 
-  // Load from URL on mount (once)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const encoded = params.get(URL_PARAM_KEY);
+- **`markdown: string`** - Current markdown content (updates immediately)
+- **`loadedFromUrl: boolean`** - Set once on mount, indicates if content came from URL
 
-    if (encoded) {
-      const result = decode(encoded);
-      if (result.success) {
-        setMarkdownState(result.decoded);
-        setLoadedFromUrl(true);
-        return;
-      }
-    }
-
-    // Fallback to default
-    setMarkdownState(initialMarkdown ?? DEFAULT_MARKDOWN);
-  }, []);
-
-  // Debounced URL sync
-  const debouncedSync = useMemo(
-    () =>
-      debounce((content: string) => {
-        const result = encode(content);
-        if (result.success) {
-          if (result.compressedLength > MAX_URL_LENGTH) {
-            console.warn(
-              `Encoded markdown exceeds URL length limit ` +
-                `(${result.compressedLength} > ${MAX_URL_LENGTH})`,
-            );
-          }
-
-          const url = new URL(window.location.href);
-          url.searchParams.set(URL_PARAM_KEY, result.encoded);
-          window.history.replaceState(null, '', url.toString());
-        }
-      }, URL_UPDATE_DEBOUNCE_MS),
-    [],
-  );
-
-  // Public setter that triggers sync
-  const setMarkdown = useCallback(
-    (value: string) => {
-      setMarkdownState(value);
-      debouncedSync(value);
-    },
-    [debouncedSync],
-  );
-
-  return {
-    markdown,
-    setMarkdown,
-    loadedFromUrl,
-    syncToUrl: () => debouncedSync.flush(),
-  };
-}
-```
+Implementation details are in `quickstart.md`.
 
 ## Performance Considerations
 
