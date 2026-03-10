@@ -81,10 +81,10 @@ A user edits markdown content and the URL automatically updates in realtime to r
 
 ### Edge Cases
 
-- What happens when the markdown content exceeds URL length limits (typically 2048 characters for some browsers)? → Log console.warn and continue URL update
-- How does the system handle special characters and Unicode in markdown content?
-- What happens when the URL contains malformed or corrupted encoded data?
-- How does the system handle empty querystring parameters?
+- What happens when the markdown content exceeds URL length limits (2048 characters for IE/Edge, 32KB+ for modern browsers)? → Log console.warn and continue URL update (browser will truncate if needed)
+- How does the system handle special characters and Unicode in markdown content? → LZ-string compression preserves all UTF-16 characters including emojis, special symbols, and multi-byte Unicode through encode/decode cycle
+- What happens when the URL contains malformed or corrupted encoded data? → Silent fallback to default markdown placeholder content without error messages (per FR-009)
+- How does the system handle empty querystring parameters? → Show default markdown placeholder content (per FR-005)
 - What happens when users manually edit the URL querystring? → Ignore manual edits and only load querystring on initial page load
 
 ## Requirements _(mandatory)_
@@ -94,8 +94,7 @@ A user edits markdown content and the URL automatically updates in realtime to r
 - **FR-001**: System MUST encode markdown content into a URL-safe format and store it in the `md` querystring parameter
 - **FR-002**: System MUST decode markdown content from the `md` querystring parameter when loading the page
 - **FR-003**: System MUST update the browser URL using replaceState (not pushState) to avoid creating browser history entries for each edit
-- **FR-004**: System MUST load markdown from querystring on initial page load
-- **FR-004a**: System MUST NOT reload content from querystring after initial page load (manual URL edits are ignored)
+- **FR-004**: System MUST load markdown from querystring on initial page load only and MUST NOT reload content from querystring after initial page load (manual URL edits are ignored)
 - **FR-005**: System MUST handle empty or missing querystring parameters gracefully by showing default markdown placeholder content
 - **FR-006**: System MUST preserve all markdown formatting, including special characters and Unicode, through encode/decode cycle
 - **FR-007**: System MUST automatically update the URL in realtime as the user types or edits markdown content
