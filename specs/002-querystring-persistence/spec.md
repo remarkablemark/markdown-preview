@@ -67,21 +67,6 @@ A user edits markdown content and the URL automatically updates in realtime to r
 
 ---
 
-### User Story 4 - Handle Browser Navigation (Priority: P3)
-
-A user navigates backward/forward in browser history after the URL has been updated multiple times through realtime synchronization.
-
-**Why this priority**: This improves user experience with browser integration but is not critical for the core sharing functionality.
-
-**Independent Test**: Can be fully tested by editing markdown multiple times (triggering URL updates), using browser back/forward buttons, and verifying content updates accordingly.
-
-**Acceptance Scenarios**:
-
-1. **Given** user has edited markdown multiple times (URL updated automatically), **When** user clicks browser back button, **Then** the editor loads the previous version from history
-2. **Given** user has navigated back in history, **When** user clicks browser forward button, **Then** the editor loads the next version from history
-
----
-
 ### Edge Cases
 
 - What happens when the markdown content exceeds URL length limits (typically 2048 characters for some browsers)?
@@ -89,7 +74,6 @@ A user navigates backward/forward in browser history after the URL has been upda
 - What happens when the URL contains malformed or corrupted encoded data?
 - How does the system handle empty querystring parameters?
 - What happens when users manually edit the URL querystring?
-- How does the system handle concurrent edits in multiple browser tabs with the same URL?
 
 ## Requirements _(mandatory)_
 
@@ -97,7 +81,7 @@ A user navigates backward/forward in browser history after the URL has been upda
 
 - **FR-001**: System MUST encode markdown content into a URL-safe format when saving to querystring
 - **FR-002**: System MUST decode markdown content from querystring when loading the page
-- **FR-003**: System MUST update the browser URL without triggering a page reload when saving markdown
+- **FR-003**: System MUST update the browser URL using replaceState (not pushState) to avoid creating browser history entries for each edit
 - **FR-004**: System MUST load markdown from querystring on initial page load
 - **FR-005**: System MUST handle empty or missing querystring parameters gracefully by showing empty/default content
 - **FR-006**: System MUST preserve all markdown formatting, including special characters and Unicode, through encode/decode cycle
