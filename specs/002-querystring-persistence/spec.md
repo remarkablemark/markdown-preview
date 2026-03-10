@@ -46,38 +46,38 @@ A user receives a URL containing markdown content and wants to view and edit it 
 **Acceptance Scenarios**:
 
 1. **Given** user opens a URL with markdown in the querystring, **When** the page loads, **Then** the editor displays the decoded markdown content
-2. **Given** user has loaded markdown from URL, **When** user edits the content, **Then** the changes are reflected in the editor without affecting the original URL until explicitly saved
+2. **Given** user has loaded markdown from URL, **When** user edits the content, **Then** the changes are reflected in both the editor and the URL automatically
 3. **Given** user opens a URL without markdown in the querystring, **When** the page loads, **Then** the editor displays empty or default content
 
 ---
 
-### User Story 3 - Persist Edits to URL (Priority: P2)
+### User Story 3 - Realtime URL Synchronization (Priority: P2)
 
-A user who has loaded markdown from a URL makes edits and wants to update the URL to reflect the current state.
+A user edits markdown content and the URL automatically updates in realtime to reflect the current state without requiring explicit save actions.
 
-**Why this priority**: This enables iterative editing and re-sharing, enhancing the collaborative workflow. It's valuable but not essential for the basic save/load functionality.
+**Why this priority**: This enables seamless sharing and eliminates the need for manual save actions. Users can copy the URL at any time and it will contain their current work.
 
-**Independent Test**: Can be fully tested by loading markdown from URL, editing it, saving again, and verifying the URL updates with new content.
+**Independent Test**: Can be fully tested by typing in the editor and observing the URL update automatically as content changes.
 
 **Acceptance Scenarios**:
 
-1. **Given** user has loaded markdown from URL and made edits, **When** user triggers save action, **Then** the URL updates to reflect the current editor content
-2. **Given** user has made multiple edits, **When** user saves multiple times, **Then** each save updates the URL with the latest content
-3. **Given** user has unsaved changes, **When** user navigates away, **Then** [NEEDS CLARIFICATION: Should we warn about unsaved changes, auto-save, or allow navigation without warning?]
+1. **Given** user is typing in the editor, **When** user pauses or continues typing, **Then** the URL updates automatically to reflect the current editor content
+2. **Given** user has made edits, **When** user copies the URL at any time, **Then** the copied URL contains the most recent content
+3. **Given** user has content in the editor, **When** user navigates away, **Then** navigation proceeds without warning (content is already persisted in URL)
 
 ---
 
 ### User Story 4 - Handle Browser Navigation (Priority: P3)
 
-A user navigates backward/forward in browser history after saving markdown to URL multiple times.
+A user navigates backward/forward in browser history after the URL has been updated multiple times through realtime synchronization.
 
 **Why this priority**: This improves user experience with browser integration but is not critical for the core sharing functionality.
 
-**Independent Test**: Can be fully tested by saving markdown multiple times, using browser back/forward buttons, and verifying content updates accordingly.
+**Independent Test**: Can be fully tested by editing markdown multiple times (triggering URL updates), using browser back/forward buttons, and verifying content updates accordingly.
 
 **Acceptance Scenarios**:
 
-1. **Given** user has saved markdown to URL multiple times, **When** user clicks browser back button, **Then** the editor loads the previous version from history
+1. **Given** user has edited markdown multiple times (URL updated automatically), **When** user clicks browser back button, **Then** the editor loads the previous version from history
 2. **Given** user has navigated back in history, **When** user clicks browser forward button, **Then** the editor loads the next version from history
 
 ---
@@ -101,9 +101,9 @@ A user navigates backward/forward in browser history after saving markdown to UR
 - **FR-004**: System MUST load markdown from querystring on initial page load
 - **FR-005**: System MUST handle empty or missing querystring parameters gracefully by showing empty/default content
 - **FR-006**: System MUST preserve all markdown formatting, including special characters and Unicode, through encode/decode cycle
-- **FR-007**: System MUST provide a user-facing action (button, keyboard shortcut, or automatic) to trigger save to URL
-- **FR-008**: System MUST handle URL length limitations by [NEEDS CLARIFICATION: truncating content with warning, preventing save, or compressing data?]
-- **FR-009**: System MUST handle malformed querystring data by [NEEDS CLARIFICATION: showing error message, falling back to empty content, or attempting recovery?]
+- **FR-007**: System MUST automatically update the URL in realtime as the user types or edits markdown content
+- **FR-008**: System MUST compress markdown content before encoding to URL to maximize capacity within browser URL length limits
+- **FR-009**: System MUST handle malformed querystring data by silently falling back to empty content without showing error messages
 
 ### Key Entities
 
