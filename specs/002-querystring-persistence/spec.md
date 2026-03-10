@@ -15,6 +15,7 @@
 - Q: What should happen when content exceeds URL length limits after compression? → A: Log console.warn and continue to update URL
 - Q: What performance target should encode/decode operations meet? → A: Complete under 100ms for imperceptible delays
 - Q: What content should be shown when querystring is empty or corrupt? → A: Show default markdown placeholder with example syntax
+- Q: What happens when users manually edit the URL querystring? → A: Ignore manual edits and only load querystring on initial page load
 
 ## Constitution Alignment
 
@@ -84,7 +85,7 @@ A user edits markdown content and the URL automatically updates in realtime to r
 - How does the system handle special characters and Unicode in markdown content?
 - What happens when the URL contains malformed or corrupted encoded data?
 - How does the system handle empty querystring parameters?
-- What happens when users manually edit the URL querystring?
+- What happens when users manually edit the URL querystring? → Ignore manual edits and only load querystring on initial page load
 
 ## Requirements _(mandatory)_
 
@@ -94,6 +95,7 @@ A user edits markdown content and the URL automatically updates in realtime to r
 - **FR-002**: System MUST decode markdown content from the `md` querystring parameter when loading the page
 - **FR-003**: System MUST update the browser URL using replaceState (not pushState) to avoid creating browser history entries for each edit
 - **FR-004**: System MUST load markdown from querystring on initial page load
+- **FR-004a**: System MUST NOT reload content from querystring after initial page load (manual URL edits are ignored)
 - **FR-005**: System MUST handle empty or missing querystring parameters gracefully by showing default markdown placeholder content
 - **FR-006**: System MUST preserve all markdown formatting, including special characters and Unicode, through encode/decode cycle
 - **FR-007**: System MUST automatically update the URL in realtime as the user types or edits markdown content
