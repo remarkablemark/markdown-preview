@@ -126,113 +126,13 @@ if (check.exceedsLimit) {
 
 ---
 
-### Constants Types
-
-#### `UrlParamKey`
-
-Literal type for the URL parameter name.
-
-```typescript
-export type UrlParamKey = 'md';
-```
-
-**Usage**:
-
-```typescript
-const paramKey: UrlParamKey = 'md'; // ✅ Valid
-const paramKey: UrlParamKey = 'markdown'; // ❌ Type error
-```
-
----
-
-## Internal Types (Not Exported)
-
-These types are used internally but not part of the public API:
-
-### `UrlPersistenceState`
-
-Internal state for the hook (not exported).
-
-```typescript
-interface UrlPersistenceState {
-  markdown: string;
-  loadedFromUrl: boolean;
-  isSyncing: boolean;
-  lastError: Error | null;
-}
-```
-
-### `DebouncedFunction`
-
-Type for debounced function (not exported).
-
-```typescript
-interface DebouncedFunction<T extends (...args: any[]) => any> {
-  (...args: Parameters<T>): void;
-  cancel: () => void;
-  flush: () => void;
-}
-```
-
----
-
-## Type Utilities
-
-### Type Guards
-
-#### `isEncodeSuccess`
-
-Type guard for successful encode result.
-
-```typescript
-export function isEncodeSuccess(
-  result: EncodeResult,
-): result is { success: true; encoded: string; compressedLength: number } {
-  return result.success === true;
-}
-```
-
-**Usage**:
-
-```typescript
-const result = encodeMarkdown(content);
-if (isEncodeSuccess(result)) {
-  // TypeScript knows result has 'encoded' and 'compressedLength'
-  updateUrl(result.encoded);
-}
-```
-
-#### `isDecodeSuccess`
-
-Type guard for successful decode result.
-
-```typescript
-export function isDecodeSuccess(
-  result: DecodeResult,
-): result is { success: true; decoded: string } {
-  return result.success === true;
-}
-```
-
-**Usage**:
-
-```typescript
-const result = decodeMarkdown(encoded);
-if (isDecodeSuccess(result)) {
-  // TypeScript knows result has 'decoded'
-  setMarkdown(result.decoded);
-}
-```
-
----
-
 ## Constants
 
 ### Type-Safe Constants
 
 ```typescript
 /** Querystring parameter name for markdown content */
-export const URL_PARAM_KEY: UrlParamKey = 'md' as const;
+export const URL_PARAM_KEY = 'md' as const;
 
 /** Maximum URL length before warning (conservative for compatibility) */
 export const MAX_URL_LENGTH: number = 2048;
