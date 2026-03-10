@@ -108,7 +108,6 @@ export interface UrlLengthCheck {
 
 ### Initial Page Load
 
-```
 1. Page loads
 2. useUrlPersistence hook mounts
 3. Read querystring parameter 'md'
@@ -118,11 +117,9 @@ export interface UrlLengthCheck {
    c. If failed: Use DEFAULT_MARKDOWN
 5. If absent: Use DEFAULT_MARKDOWN
 6. Set loadedFromUrl flag
-```
 
 ### User Editing Flow
 
-```
 1. User types in editor
 2. onChange event fires
 3. setMarkdown() called with new content
@@ -136,18 +133,15 @@ export interface UrlLengthCheck {
    c. If > MAX_URL_LENGTH: console.warn()
    d. Update URL using history.replaceState()
 7. URL updated (no page reload)
-```
 
 ### URL Sharing Flow
 
-```
 1. User copies URL from browser
 2. URL contains encoded markdown in 'md' parameter
 3. Recipient opens URL
 4. Initial page load flow executes
 5. Markdown decoded and displayed
 6. Recipient can edit (triggers user editing flow)
-```
 
 ## Validation Rules
 
