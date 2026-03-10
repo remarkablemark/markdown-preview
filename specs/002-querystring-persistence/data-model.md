@@ -70,12 +70,6 @@ interface UrlPersistenceState {
 
   /** Whether content was loaded from URL on initial mount */
   loadedFromUrl: boolean;
-
-  /** Whether URL sync is currently active */
-  isSyncing: boolean;
-
-  /** Last error encountered (for debugging) */
-  lastError: Error | null;
 }
 ```
 
@@ -84,16 +78,13 @@ interface UrlPersistenceState {
 ```
 [Initial] → [Loading from URL] → [Loaded]
                 ↓
-         [Syncing to URL] ← [User Editing]
-                ↓
-         [Sync Complete]
+         [User Editing] → [Debounced Sync to URL]
 ```
 
 **Invariants**:
 
 - `loadedFromUrl` is set once on mount, never changes
-- `isSyncing` is true only during debounce window
-- `lastError` is cleared on successful operations
+- `markdown` updates immediately on user input, URL sync is debounced
 
 ## Constants
 
