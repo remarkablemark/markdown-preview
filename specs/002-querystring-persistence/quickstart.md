@@ -105,8 +105,6 @@ console.log('Hello, world!');
 **File**: `src/utils/urlEncoder.test.ts`
 
 ```typescript
-import { describe, expect, it } from 'vitest';
-
 import { checkUrlLength, decodeMarkdown, encodeMarkdown } from './urlEncoder';
 
 describe('urlEncoder', () => {
@@ -326,7 +324,6 @@ npm run test:ci -- src/utils/urlEncoder.test.ts
 ```typescript
 import { renderHook, waitFor } from '@testing-library/react';
 import { act } from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useUrlPersistence } from './useUrlPersistence';
 

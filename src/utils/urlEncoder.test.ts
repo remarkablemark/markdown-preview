@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import { checkUrlLength, decodeMarkdown, encodeMarkdown } from './urlEncoder';
 
 describe('urlEncoder', () => {
