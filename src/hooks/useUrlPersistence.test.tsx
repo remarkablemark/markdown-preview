@@ -8,17 +8,10 @@ vi.mock('src/utils', async () => {
   return {
     ...actual,
     debounce: (fn: (content: string) => void) => {
-      const debouncedFn = ((content: string) => {
-        fn(content);
-      }) as ((content: string) => void) & {
-        cancel: () => void;
-        flush: () => void;
-      };
-      debouncedFn.cancel = vi.fn();
-      debouncedFn.flush = () => {
-        fn('');
-      };
-      return debouncedFn;
+      const mock = fn as typeof fn & { cancel: () => void; flush: () => void };
+      mock.cancel = vi.fn();
+      mock.flush = vi.fn();
+      return mock;
     },
   };
 });
