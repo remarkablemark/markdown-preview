@@ -28,3 +28,7 @@ console.log(greeting);
 - [ ] Task
 - [x] Done
 `;
+
+export const URL_PARAM_KEY = 'md' as const;
+export const MAX_URL_LENGTH = 2048;
+export const URL_UPDATE_DEBOUNCE_MS = 500;

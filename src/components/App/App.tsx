@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { DEFAULT_MARKDOWN } from 'src/constants';
+import { useUrlPersistence } from 'src/hooks';
 import type { LayoutMode } from 'src/types/markdown';
 
 import { Editor } from '../Editor';
@@ -9,7 +9,7 @@ import { Preview } from '../Preview';
 const MOBILE_BREAKPOINT = 768;
 
 export function App() {
-  const [markdown, setMarkdown] = useState(DEFAULT_MARKDOWN);
+  const { markdown, setMarkdown } = useUrlPersistence();
   const [mode, setMode] = useState<LayoutMode>('split');
   const modeRef = useRef(mode);
 

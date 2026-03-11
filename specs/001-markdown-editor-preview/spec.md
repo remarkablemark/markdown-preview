@@ -3,7 +3,7 @@
 **Feature Branch**: `001-markdown-editor-preview`
 **Created**: 2026-03-01
 **Updated**: 2026-03-01
-**Status**: Implemented
+**Status**: Done
 **Input**: User description: "Markdown editor and preview"
 
 ## Implementation Notes

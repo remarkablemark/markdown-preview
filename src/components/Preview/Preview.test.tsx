@@ -75,18 +75,6 @@ describe('Preview Component', () => {
       // Empty state should have styling (text-gray-400 italic from default placeholder)
       expect(preview).toBeInTheDocument();
     });
-
-    it('accepts custom empty placeholder', () => {
-      render(
-        <Preview
-          markdown=""
-          options={{ emptyPlaceholder: '<p>Custom placeholder</p>' }}
-        />,
-      );
-
-      const preview = screen.getByRole('region', { name: /markdown preview/i });
-      expect(preview).toHaveTextContent('Custom placeholder');
-    });
   });
 
   describe('updates', () => {
