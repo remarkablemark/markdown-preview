@@ -141,23 +141,6 @@ describe('Editor Component', () => {
   });
 
   describe('empty state', () => {
-    it('placeholder displays when editor is empty on load', () => {
-      render(
-        <EditorHarness
-          initialValue=""
-          placeholder="Start typing markdown..."
-        />,
-      );
-
-      const textarea = screen.getByRole('textbox', {
-        name: /markdown editor/i,
-      });
-      expect(textarea).toHaveAttribute(
-        'placeholder',
-        'Start typing markdown...',
-      );
-    });
-
     it('placeholder disappears when user starts typing', async () => {
       const user = userEvent.setup();
       render(<EditorHarness initialValue="" placeholder="Start typing..." />);

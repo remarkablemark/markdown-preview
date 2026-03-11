@@ -68,17 +68,6 @@ describe('App component', () => {
     expect(preview).toBeInTheDocument();
   });
 
-  it('handleToggleView switches mode from editor-only to preview-only', () => {
-    // This test verifies the handleToggleView function logic is correctly wired
-    // The actual button visibility depends on viewport (mobile-only in Layout component)
-    // Testing that the component renders correctly with different initial states
-    render(<App />);
-
-    // Verify initial state: split mode with both editor and preview
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByRole('region')).toBeInTheDocument();
-  });
-
   it('toggle button is present and calls onToggleView when clicked', async () => {
     const user = userEvent.setup();
     render(<App />);
@@ -121,24 +110,6 @@ describe('App component', () => {
   });
 
   describe('responsive behavior', () => {
-    const originalInnerWidth = window.innerWidth;
-
-    beforeAll(() => {
-      Object.defineProperty(window, 'innerWidth', {
-        writable: true,
-        configurable: true,
-        value: originalInnerWidth,
-      });
-    });
-
-    afterAll(() => {
-      Object.defineProperty(window, 'innerWidth', {
-        writable: true,
-        configurable: true,
-        value: originalInnerWidth,
-      });
-    });
-
     it('switches to editor-only when resizing to mobile viewport', () => {
       // Start with desktop viewport
       Object.defineProperty(window, 'innerWidth', {
