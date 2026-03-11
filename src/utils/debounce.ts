@@ -13,18 +13,16 @@ export function debounce(
     }
 
     timeoutId = setTimeout(() => {
-      /* v8 ignore start */
+      /* v8 ignore next -- @preserve */
       if (lastArgs) {
         fn(...lastArgs);
       }
-      /* v8 ignore end */
 
       timeoutId = null;
       lastArgs = null;
     }, delay);
   }) as ((content: string) => void) & { cancel: () => void; flush: () => void };
 
-  /* v8 ignore start */
   debouncedFn.cancel = () => {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
@@ -32,7 +30,6 @@ export function debounce(
       lastArgs = null;
     }
   };
-  /* v8 ignore end */
 
   debouncedFn.flush = () => {
     if (timeoutId !== null && lastArgs !== null) {
