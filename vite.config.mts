@@ -16,6 +16,10 @@ export default defineConfig({
               name: 'react',
               test: /node_modules\/(react|react-dom)/,
             },
+            {
+              name: 'markdown',
+              test: /node_modules\/(dompurify|lz-string|marked)/,
+            },
           ],
         },
       },
