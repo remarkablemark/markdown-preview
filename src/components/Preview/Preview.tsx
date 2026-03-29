@@ -50,7 +50,7 @@ export function Preview({
       role="region"
       aria-label={ariaLabel}
       aria-live="polite"
-      className="prose dark:prose-invert h-full max-w-none overflow-auto bg-white p-4 dark:bg-gray-800"
+      className="prose dark:prose-invert h-full max-w-none overflow-auto bg-white p-4 dark:bg-mist-800"
       // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml
       dangerouslySetInnerHTML={{ __html: html }}
     />
