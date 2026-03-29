@@ -15,7 +15,7 @@ import {
 export function useUrlPersistence(
   initialMarkdown?: string,
 ): UseUrlPersistenceReturn {
-  const [markdown, setMarkdownState] = useState<string>('');
+  const [markdown, setMarkdownState] = useState('');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
