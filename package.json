@@ -18,7 +18,7 @@
     "@tailwindcss/typography": "0.5.19",
     "dompurify": "3.4.1",
     "lz-string": "1.5.0",
-    "marked": "18.0.2",
+    "marked": "18.0.3",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "tailwindcss": "4.2.4"
