@@ -1,0 +1,16 @@
+{
+  "name": "Markdown Preview",
+  "short_name": "Markdown Preview",
+  "description": "📝 Edit and preview Markdown",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
